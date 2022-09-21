@@ -7,3 +7,8 @@ output "db_instance_Information" {
   value = google_sql_database_instance.database
   sensitive = true
 }
+
+# firewall values
+output "firewall-common" {
+  value = google_compute_firewall.common
+}
