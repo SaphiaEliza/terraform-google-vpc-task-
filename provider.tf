@@ -1,4 +1,15 @@
+terraform {
+  required_providers {
+    google = {
+      source  = "hashicorp/google"
+      version = "4.30.0"
+    }
+  }
+}
+
 provider "google" {
-  region = "us-west4"
-  zone   = "us-west4-b"
+  project = var.project_name
+  region  = var.region
+  zone    = var.zone
+
 }

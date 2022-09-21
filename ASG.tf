@@ -1,16 +1,3 @@
-#module for the load balancer.
-
-module "lb" {
-  source       = "GoogleCloudPlatform/lb/google"
-  version      = "2.2.0"
-  region       = var.region
-  name         = var.lb_name
-  service_port = 80
-  target_tags  = ["my-target-pool"]
-  network      = google_compute_network.vpc_network.name
-}
-
-#this block of codeadds an autoscaling group in a zone specified in the variables file using an instance group manager as a target
 
 resource "google_compute_autoscaler" "team3" {
      depends_on = [
@@ -35,11 +22,14 @@ resource "google_compute_autoscaler" "team3" {
 #creating a machine template so the autoscaling knows what type of machine to work with.
 
 resource "google_compute_instance_template" "compute-engine" {
+     depends_on = [
+        google_sql_database_instance.database,
+      
+    ]
   name                    = var.template_name
   machine_type            = var.machine_type
   can_ip_forward          = false
   project                 = var.project_name
-  
   metadata_startup_script = <<SCRIPT
     yum install httpd wget unzip epel-release mysql -y
     yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
@@ -69,17 +59,15 @@ resource "google_compute_instance_template" "compute-engine" {
   disk {
     source_image = data.google_compute_image.centos_7.self_link
   }
+
   network_interface {
-    network = google_compute_network.vpc_network.id
-    #access_config {
+    network = google_compute_network.vpc-network-team3.id
+    access_config {
       // Include this section to give the VM an external ip address
     }
 
   }
-
-
-  
-
+}
 #creating a target pool
 
 resource "google_compute_target_pool" "team3" {

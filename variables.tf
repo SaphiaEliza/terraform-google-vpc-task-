@@ -6,7 +6,7 @@ variable "machine_type" {
 
 variable "project_name" {
   type        = string
-  default     = "achlafgulxxxlxph"
+  default     = "wcyfkhwrvwfvzeyr"
   description = "enter your project name"
 }
 
@@ -82,7 +82,7 @@ variable "vpc_subnet_name" {
 
 variable "vpc_name" {
   type        = string
-  default     = "vpc-network-team"
+  default     = "vpc-network-team3"
   description = "desired name of the vpc being created"
 }
 
