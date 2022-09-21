@@ -1,6 +1,6 @@
 #this code of block will provision a database instance. specify the version, the region and the password in the variables file 
 
-resource "google_sql_database_instance" "database" {
+resource "google_sql_database_instance" "instance" {
   name                = var.db_name
   database_version    = var.data_base_version
   region              = var.region
