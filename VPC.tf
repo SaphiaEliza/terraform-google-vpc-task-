@@ -1,21 +1,9 @@
-//Creating VPC Network
-resource "google_compute_network" "vpc_network" {
-  name                    = "prod-wp-env"
-  description             = "VPC Network for WordPress"
-  auto_create_subnetworks = false
+resource "google_compute_network" "vpc-network-team3" {
+  name                    = var.vpc_name
+  auto_create_subnetworks = "true"
+  routing_mode            = "GLOBAL"
 }
 
-//Creating Subnetwork VPC
-resource "google_compute_subnetwork" "subnetwork" {
-  name          = "wp-subnet"
-  ip_cidr_range = "10.2.0.0/16"
-  region        = var.region
-  network       = google_compute_network.vpc_network.id
-
-  depends_on = [
-    google_compute_network.vpc_network
-  ]
-}
 
 //Creating Firewall VPC Network
 resource "google_compute_firewall" "firewall" {
