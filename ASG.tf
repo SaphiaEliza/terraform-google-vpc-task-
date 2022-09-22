@@ -1,3 +1,4 @@
+#this block of codeadds an autoscaling group in a zone specified in the variables file using an instance group manager as a target
 
 resource "google_compute_autoscaler" "team3" {
      depends_on = [
